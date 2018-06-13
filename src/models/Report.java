@@ -39,8 +39,8 @@ public class Report {
 	@JoinColumn(name = "employee_id",nullable = false)
 	private Employee employee;
 
-	@Column(name = "employee_date",nullable = false)
-	private Date employee_date;
+	@Column(name = "report_date",nullable = false)
+	private Date report_date;
 
 	@Column(name = "title",nullable = false)
 	private String title;
@@ -71,12 +71,12 @@ public class Report {
 		this.employee = employee;
 	}
 
-	public Date getEmployee_date() {
-		return employee_date;
+	public Date getReport_date() {
+		return report_date;
 	}
 
-	public void setEmployee_date(Date employee_date) {
-		this.employee_date = employee_date;
+	public void setReport_date(Date report_date) {
+		this.report_date = report_date;
 	}
 
 	public String getTitle() {
