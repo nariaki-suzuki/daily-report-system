@@ -1,7 +1,6 @@
 package controllers.reports;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.servlet.RequestDispatcher;
@@ -15,16 +14,16 @@ import models.Report;
 import utils.DBUtil;
 
 /**
- * Servlet implementation class ReportsIndexServlet
+ * Servlet implementation class ReportsShowServlet
  */
-@WebServlet("/reports/index")
-public class ReportsIndexServlet extends HttpServlet {
+@WebServlet("/reports/show")
+public class ReportsShowServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ReportsIndexServlet() {
+    public ReportsShowServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -37,31 +36,16 @@ public class ReportsIndexServlet extends HttpServlet {
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
 		EntityManager em = DBUtil.createEntityManager();
 
-		int page;
-		try {
-			page = Integer.parseInt(request.getParameter("page"));
-		}catch(Exception e) {
-			page = 1;
-		}
-		List<Report> reports = em.createNamedQuery("getAllReports",Report.class)
-								 .setFirstResult(15 * (page - 1))
-								 .setMaxResults(15)
-								 .getResultList();
-
-		long reports_count = (long)em.createNamedQuery("getReportsCount",Long.class)
-									 .getSingleResult();
+		Report r = em.find(Report.class,Integer.parseInt(request.getParameter("id")));
 
 		em.close();
 
-		request.setAttribute("reports",reports);
-		request.setAttribute("reports_count",reports_count);
-		request.setAttribute("page", page);
-		if(request.getSession().getAttribute("flush") != null) {
-			request.getSession().removeAttribute("flush");
-		}
+		request.setAttribute("report",r);
+		request.setAttribute("_token", request.getSession().getId());
 
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/reports/index.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/reports/show.jsp");
 		rd.forward(request, response);
+
 	}
 
 }
