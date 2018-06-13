@@ -22,7 +22,7 @@
 						<td class = "report_name"><c:out value = "${report.employee.name}" /></td>
 						<td class = "report_date"><fmt:formatDate value = '${reprot.report_date}' pattern = "yyyy-MM-dd" /></td>
 						<td class = "report title"><c:url value = "${report.employee.title}"  /></td>
-						<td class = "report_action"><a href = "<c:url value = 'reports/show?id=${report.id' />">詳細を見る</a></td>
+						<td class = "report_action"><a href = "<c:url value = '/reports/show?id=${report.id' />">詳細を見る</a></td>
 					</tr>
 				</c:forEach>
 			</tbody>
