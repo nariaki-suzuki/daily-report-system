@@ -18,11 +18,11 @@
 					<th class = "report_action">操作</th>
 				</tr>
 				<c:forEach var = "report" items = "${reports}" varStatus = "status">
-					<tr class = "row${status_count % 2}">
+					<tr class = "row${status.count % 2}">
 						<td class = "report_name"><c:out value = "${report.employee.name}" /></td>
-						<td class = "report_date"><fmt:formatDate value = '${reprot.report_date}' pattern = "yyyy-MM-dd" /></td>
-						<td class = "report title"><c:url value = "${report.employee.title}"  /></td>
-						<td class = "report_action"><a href = "<c:url value = '/reports/show?id=${report.id' />">詳細を見る</a></td>
+						<td class = "report_date"><fmt:formatDate value = '${report.report_date}' pattern = 'yyyy-MM-dd' /></td>
+						<td class = "report title"><c:url value = "${report.title}"  /></td>
+						<td class = "report_action"><a href = "<c:url value = '/reports/show?id=${report.id}' />">詳細を見る</a></td>
 					</tr>
 				</c:forEach>
 			</tbody>
@@ -30,7 +30,7 @@
 
 		<div id = "pagination">
 		(全${reports_count}件)<br />
-		<c:forEach var = "i" begin = "1" end = "${((report_count - 1 ) / 15) + 1)}" step = "1">
+		<c:forEach var = "i" begin = "1" end = "${((report_count - 1 ) / 15) + 1}" step = "1">
 			<c:choose>
 				<c:when test = "${i == page}">
 					<c:out value = "${i}" />&nbsp;
@@ -41,6 +41,6 @@
 			</c:choose>
 		</c:forEach>
 		</div>
-		<p><a href = "<c:url value = '/reports/new' />">新規日報の登録</a></p>"
+		<p><a href = "<c:url value = '/reports/new' />">新規日報の登録</a></p>
 	</c:param>
 </c:import>
